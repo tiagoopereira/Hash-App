@@ -1,3 +1,11 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+hash_generate:
+  path: /api/hashes/generate/{string}/
+  controller: App\Controller\HashController::create
+  methods:
+    - GET
+
+hash_index:
+  path: /api/hashes/
+  controller: App\Controller\HashController::index
+  methods:
+    - GET
