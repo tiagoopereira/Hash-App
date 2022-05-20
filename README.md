@@ -1,4 +1,4 @@
-# Hash-App
+# API Hash
 ### Execução
 ####  Makefile:
     - make run
