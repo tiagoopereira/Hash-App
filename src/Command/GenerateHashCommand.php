@@ -9,12 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-// (docker exec -it hash_app) php bin/console avato:test {string} --requests={number}
+// docker exec -it hash_app php bin/console generate:hash {string} --requests={number}
 class GenerateHashCommand extends Command
 {
     const BASE_URL = 'http://localhost:8000/api/hashes/generate/';
 
-    protected static $defaultName = 'avato:test';
+    protected static $defaultName = 'generate:hash';
     private HttpClientInterface $client;
 
     public function __construct(HttpClientInterface $client)
