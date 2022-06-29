@@ -37,21 +37,21 @@ class GenerateHashCommand extends Command
         $data = $this->getHashes($string, $requests);
 
         $output->writeln([
-            '',
+            '_____________________________________________________________________',
+            '                                 |             |                     ',
             '               HASH              |     KEY     |     ATTEMPTS',
-            '====================================================================',
+            '_________________________________|_____________|_____________________',
         ]);
 
         foreach ($data as $hash) {
             $output->writeln([
+                '                                 |             |                     ',
                 $hash['hash'] . ' |   ' . $hash['key'] . '  |       ' . $hash['attempts'],
-                '===================================================================='
+                '_________________________________|_____________|_____________________'
             ]);
         }
 
-        $output->writeln([
-            ''
-        ]);
+        $output->writeln(PHP_EOL);
 
         return Command::SUCCESS;
     }
@@ -62,7 +62,7 @@ class GenerateHashCommand extends Command
 
         if ($requests === 1) {
             $response = $this->client->request('GET', $url);
-            return json_decode($response->getContent(), true);
+            return [json_decode($response->getContent(), true)];
         }
 
         $data = [];
