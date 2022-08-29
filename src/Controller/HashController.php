@@ -22,30 +22,24 @@ class HashController extends AbstractController
 
     public function index(Request $request): JsonResponse
     {
-        $limit = $request->get('limit') ? $request->get('limit') : 10;
-        $offset = $request->get('offset') ? $request->get('offset') : 1;
+        $limit = $request->get('limit') ?? 10;
+        $offset = $request->get('offset') ?? 1;
         $filter = $request->get('filter');
 
         $entities = $this->hashService->findAll($limit, $offset, $filter);
-        $response =  new ResponseService($entities, $limit, $offset);
+        $response = new ResponseService($entities, $limit, $offset);
 
         return $response->getResponse();
     }
 
-    public function create(Request $request, RateLimiterFactory $anonymousApiLimiter, string $string): JsonResponse
+    public function create(Request $request, string $string): JsonResponse
     {
-        $limiter = $anonymousApiLimiter->create($request->getClientIp());
-
-        if ($limiter->consume(1)->isAccepted() === false) {
-            throw new TooManyRequestsHttpException();
-        }
-
         if (!isset($string) || empty($string)) {
             return new JsonResponse(['error' => 'No string provided'], 400);
         }
 
         $batch = $request->get('batch');
-        $previousBlock = $request->get('block') ? $request->get('block') : 0;
+        $previousBlock = $request->get('block') ?? 0;
 
         try {
             $entity = $this->hashService->create($string, $batch, $previousBlock);

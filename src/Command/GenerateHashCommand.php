@@ -39,7 +39,7 @@ class GenerateHashCommand extends Command
         $output->writeln([
             '_____________________________________________________________________',
             '                                 |             |                     ',
-            '               HASH              |     KEY     |     ATTEMPTS',
+            '               HASH              |     KEY     |      ATTEMPTS',
             '_________________________________|_____________|_____________________',
         ]);
 

@@ -4,7 +4,7 @@ namespace App\Service;
 
 abstract class GenerateHashService
 {
-    public static function generate(string $string, int $previousBlock = 0): array
+    public static function make(string $string, int $previousBlock = 0): array
     {
         if (!isset($string) || empty($string)) {
             throw new \InvalidArgumentException('No string provided');
@@ -14,7 +14,7 @@ abstract class GenerateHashService
         $attempts = 0;
 
         do {
-            $key = KeyService::generate();
+            $key = GenerateKeyService::make();
             $hash = md5($key . $string);
             $attempts++;
         } while (substr($hash, 0, 4) !== '0000');

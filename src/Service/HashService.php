@@ -45,7 +45,7 @@ class HashService
 
     public function create(string $string, ?string $batch = null, int $previousBlock = 0): array
     {
-        $data = GenerateHashService::generate($string, $previousBlock);
+        $data = GenerateHashService::make($string, $previousBlock);
 
         if (!is_null($batch) && !empty($batch)) {
             $data['batch'] = new \DateTime($batch, new \DateTimeZone('America/Sao_Paulo'));
