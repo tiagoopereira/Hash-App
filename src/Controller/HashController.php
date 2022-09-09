@@ -22,8 +22,8 @@ class HashController extends AbstractController
 
     public function index(Request $request): JsonResponse
     {
-        $limit = $request->get('limit') ?? 10;
-        $offset = $request->get('offset') ?? 1;
+        $limit = intval($request->get('limit', 10));
+        $offset = intval($request->get('offset', 1));
         $filter = $request->get('filter');
 
         $entities = $this->hashService->findAll($limit, $offset, $filter);
